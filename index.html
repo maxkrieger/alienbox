@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>reddit inbox</title>
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" href="icomoon.css">
+	</head>
+
+	<body>
+		<div id="main" v-show="ready">
+			<div id="toolbar">
+				<a href="#">
+					<span v-on="click: openProfile()" class="link">/u/{{user.name}}</span>
+				</a> ({{user.karma.link}} · {{user.karma.comment}})
+				<span v-on="click: togglePrefs()" class="cog icon-cog"></span>
+				<span v-on="click: show(true)" class="sync icon-loop2"></span>
+			</div>
+			<ul id="mail" v-show="!prefpane">
+				<div v-show="loading" id="loading">
+					<div class="icon-envelope" v-class="error: err"></div>
+					Loading, please wait...
+				</div>
+				<li v-repeat="mail" v-show="!loading" v-class="unread: unread" v-on="click: ctx($index)">
+					<div class="body">
+						<span class="author">{{author}}:</span>
+						<span class="truebody" v-html="body | marked"></span>
+					</div>
+					<div class="footer">
+						<div class="time">{{date | time}}</div>
+						<div class="sr">{{subreddit}}</div>
+					</div>
+				</li>
+				<div id="loadMore" v-show="!loading" v-on="click: getMoreMail()">{{morestatus}}</div>
+			</ul>
+			<div id="prefpane" v-show="prefpane">
+				<ul>
+					<li><b>Check interval:</b>
+						<input type="number" v-model="interval" v-on="keyup: updateInterval | key 13" v-class="complete: complete"> minutes
+						<span class="micro" v-on="click: updateInterval()">save</span>
+					</li>
+					<li><b>Signed in as /u/{{user.name}}</b>
+						<span class="micro" v-on="click: signOut()">sign out</span>
+					</li>
+					<li><b>Alienbox is open:</b>
+						<span class="micro" v-on="click: quit()">quit</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div id="authgate" v-show="!authenticated">
+			<span class="quitbtn micro" v-on="click: quit()">quit</span>
+			<div id="cent">
+				<div id="alienbox">alienbox</div>
+				<div id="authenticate" class="bigbutton orangered" v-on="click: authenticate()">Sign in with Reddit</div>
+			</div>
+		</div>
+		<div id="tokengate" v-show="tokenizing">
+			Please Wait{{loadstring}}
+			<br>
+			<span class="micro noselect" v-on="click: retryAuth()">Retry?</span>
+		</div>
+		<script>
+			var app = require("./app.js");
+		</script>
+	</body>
+
+</html>
