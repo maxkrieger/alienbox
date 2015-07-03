@@ -7,7 +7,7 @@ var moment = require("moment");
 var reddit = require("./reddit");
 var persist = require("node-persist");
 
-persist.initSync();
+persist.initSync({dir: process.resourcesPath + "/persist"});
 
 var auth = new Vue({
 	el: "#authgate",

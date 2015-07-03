@@ -4,7 +4,7 @@
   "description": "An open source menubar application for checking your reddit inbox.",
   "main": "index.js",
   "scripts": {
-    "build": "electron-packager . alienbox --platform=darwin --arch=x64 --version=0.28.3 --icon=icon.icns"
+    "build": "electron-packager . alienbox --platform=darwin --arch=x64 --version=0.28.3 --icon=icon.icns --overwrite"
   },
   "author": "a9io (http://a9.io)",
   "license": "ISC",

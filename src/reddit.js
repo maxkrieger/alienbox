@@ -7,7 +7,7 @@ var persist = require("node-persist");
 
 exports.ready = new events.EventEmitter();
 
-persist.initSync();
+persist.initSync({dir: process.resourcesPath + "/persist"});
 
 var fs = require("fs");
 var reddit;
@@ -31,15 +31,17 @@ var initEvents = function() {
 		console.log("expired");
 		if (tokens.refresh !== "") {
 			reddit.refresh(tokens.refresh).then(function(refresh) {
-					var tokens = {
-						token: reddit.getAccessToken(),
-						refresh: refresh
-					};
-					persist.setItem("tokens", tokens);
+				var tokens = {
+					token: reddit.getAccessToken(),
+					refresh: reddit.getRefreshToken()
+				};
+				persist.setItem("tokens", tokens);
 			});
 		}
 	});
-	exports.ready.emit("ready");
+	setTimeout(function() {
+		exports.ready.emit("ready");
+	}, 500);
 };
 
 exports.authenticate = function(fn) {
@@ -57,8 +59,7 @@ exports.authenticate = function(fn) {
 				signIn(tokens);
 				fn(true);
 			});
-		}
-		else {
+		} else {
 			fn(false);
 		}
 	});
@@ -138,7 +139,10 @@ exports.readAll = function(fn) {
 
 exports.signOut = function() {
 	reddit.deauth();
-	persist.setItem("tokens", {token: "", refresh: ""});
+	persist.setItem("tokens", {
+		token: "",
+		refresh: ""
+	});
 };
 
 
