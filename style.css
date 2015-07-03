@@ -1,0 +1,52 @@
+body {
+	background-color: #CEE3F8;
+	font-family: "Verdana", sans-serif;
+}
+.box {
+	background-color: #FFFFFF;
+	border-radius: 5px;
+	border: 1px solid #979797;
+	margin: 25px auto;
+	text-align: center;
+	width: 70%;
+	padding: 20px;
+}
+#super {
+	margin-top: 40px;
+}
+#super img {
+	margin-bottom: -20px;
+	margin-right: -20px;
+}
+h1, h2 {
+	margin: 10px;
+}
+h1 {
+	font-size: 70px;
+	color: #FF6600;
+}
+h2 {
+	font-size: 35px;
+	color: #393939;
+}
+.sub {
+	margin: 2px;
+}
+.button {
+	display: inline-block;
+	margin: 10px;
+	padding: 20px;
+	border-radius: 3px;
+	font-size: 20px;
+	color: #FFFFFF;
+}
+#download {
+	background-color: #FF6600;
+}
+#github {
+	background-color: #54A0DE;
+}
+a {
+	text-decoration: none;
+	color: #4A90E2;
+}
