@@ -142,7 +142,7 @@ exports.signOut = function() {
 };
 
 
-fs.readFile("config.json", "utf8", function(err, data) {
+fs.readFile(__dirname + "/../config.json", "utf8", function(err, data) {
 	if (!err) {
 		config = JSON.parse(data);
 		initEvents();

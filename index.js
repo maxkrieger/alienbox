@@ -4,7 +4,7 @@ var ipc = require("ipc");
 var authenticated = false;
 
 var mb = menubar({
-	dir: __dirname,
+	dir: __dirname + "/src",
 	preloadWindow: true,
   icon: "inbox.png",
 	width: 300,
