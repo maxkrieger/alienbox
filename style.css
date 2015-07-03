@@ -50,3 +50,7 @@ a {
 	text-decoration: none;
 	color: #4A90E2;
 }
+#screenshots img {
+	display: inline;
+	margin: 10px;
+}
