@@ -14,7 +14,7 @@
     "menubar": "^2.0.14",
     "moment": "^2.10.3",
     "node-persist": "0.0.4",
-    "snoocore": "^3.0.2",
+    "snoocore": "^3.1.2",
     "vue": "^0.12.4"
   }
 }
