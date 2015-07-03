@@ -1,28 +1,58 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="utf-8">
 		<title>alienbox</title>
 		<link rel="stylesheet" type="text/css" href="style.css">
 	</head>
+
 	<body>
 		<div class="box" id="super">
-			<h1><img src="icon.png" width="90"> alienbox</h1>
+			<h1>
+				<img src="icon.png" width="90"> alienbox</h1>
 			<div class="sub">the open source reddit inbox notifier</div>
 		</div>
 		<div class="box">
-			<a href="https://github.com/a9io/alienbox/releases/download/0.121/alienbox.zip"><div class="button" id="download">Download 0.121 (OS X)</div></a>
-			<a href="https://github.com/a9io/alienbox"><div class="button" id="github">Source on Github</div></a>
+			<a href="https://github.com/a9io/alienbox/releases/download/0.121/alienbox.zip">
+				<div class="button" id="download">Download 0.121 (OS X)</div>
+			</a>
+			<a href="https://github.com/a9io/alienbox">
+				<div class="button" id="github">Source on Github</div>
+			</a>
 		</div>
 		<div class="box" id="screenshots">
 			<h2>screenshots</h2>
-			<a href="shot-1.png"><img src="shot-1.png" width="200"></a>
-			<a href="shot-2.png"><img src="shot-2.png" width="200"></a>
-			<a href="shot-3.png"><img src="shot-3.png" width="200"></a>
+			<a href="shot-1.png">
+				<img src="shot-1.png" width="200">
+			</a>
+			<a href="shot-2.png">
+				<img src="shot-2.png" width="200">
+			</a>
+			<a href="shot-3.png">
+				<img src="shot-3.png" width="200">
+			</a>
 		</div>
 		<div class="box">
 			<div class="sub">Developed by <a href="http://a9.io">a9.io</a>, built with <a href="https://github.com/atom/electron/">electron</a> and <a href="https://github.com/trevorsenior/snoocore">snoocore</a>.</div>
 			<div class="sub">Have a bug/feature request? File an <a href="https://github.com/a9io/alienbox/issues">issue</a>.</div>
 		</div>
+		<script>
+			(function(i, s, o, g, r, a, m) {
+				i['GoogleAnalyticsObject'] = r;
+				i[r] = i[r] || function() {
+					(i[r].q = i[r].q || []).push(arguments)
+				}, i[r].l = 1 * new Date();
+				a = s.createElement(o),
+					m = s.getElementsByTagName(o)[0];
+				a.async = 1;
+				a.src = g;
+				m.parentNode.insertBefore(a, m)
+			})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+			ga('create', 'UA-56010603-1', 'auto');
+			ga('send', 'pageview');
+		</script>
 	</body>
+
 </html>
