@@ -6,7 +6,7 @@ var authenticated = false;
 var mb = menubar({
 	dir: __dirname + "/src",
 	preloadWindow: true,
-  icon: "inbox.png",
+  icon: "icons/inbox.png",
 	width: 300,
 	height: 200
 });
@@ -26,11 +26,11 @@ mb.on("after-create-window", function() {
 });
 
 ipc.on("unread", function(){
-  mb.tray.setImage("unread.png");
+  mb.tray.setImage("icons/unread.png");
 });
 
 ipc.on("inbox", function(){
-  mb.tray.setImage("inbox.png");
+  mb.tray.setImage("icons/inbox.png");
 });
 
 ipc.on("quit", function(){
