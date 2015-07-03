@@ -6,7 +6,7 @@ var authenticated = false;
 var mb = menubar({
 	dir: __dirname + "/src",
 	preloadWindow: true,
-	icon: process.resourcesPath + "/icons/inbox.png",
+	icon: __dirname + "/icons/inbox.png",
 	width: 300,
 	height: 200
 });
@@ -26,16 +26,13 @@ mb.on("after-create-window", function() {
 });
 
 ipc.on("unread", function() {
-	mb.tray.setImage(process.resourcesPath + "/icons/unread.png");
+	mb.tray.setImage(__dirname + "/icons/unread.png");
 });
 
 ipc.on("inbox", function() {
-	mb.tray.setImage(process.resourcesPath + "/icons/inbox.png");
+	mb.tray.setImage(__dirname + "/icons/inbox.png");
 });
 
 ipc.on("quit", function() {
 	mb.app.quit();
-});
-mb.once('show', function () {
-  mb.window.openDevTools();
 });
