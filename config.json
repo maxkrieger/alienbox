@@ -1,8 +1,8 @@
 {
 	"key": "",
 	"secret": "",
-	"redirectUri": "",
+	"redirectUri": "http://localhost:8123/auth",
 
 	"updateurl": "",
-	"appversion": ""
+	"appversion": "1.0"
 }
