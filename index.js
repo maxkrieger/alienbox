@@ -1,7 +1,7 @@
 var menubar = require("menubar");
 var ipc = require("ipc");
 
-var authenticated = false;
+var litestring = ""; //for darkmode
 
 var mb = menubar({
 	dir: __dirname + "/src",
