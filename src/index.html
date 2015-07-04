@@ -37,7 +37,7 @@
 			<div id="prefpane" v-show="prefpane">
 				<ul>
 					<li><b>Use Dark Mode:</b>
-						<input type="checkbox" v-model="darkmode" v-on="click: updateIconMode()">save</span>
+						<input type="checkbox" v-model="darkmode"> <span v-on="click: updateIconMode()" class="micro">use</span>
 					</li>
 					<li><b>Check interval:</b>
 						<input type="number" v-model="interval" v-on="keyup: updateInterval | key 13" v-class="complete: complete"> minutes
