@@ -30,7 +30,13 @@ ipc.on("unread", function() {
 });
 
 ipc.on("inbox", function() {
-	mb.tray.setImage(__dirname + "/icons/inbox.png");
+	mb.tray.setImage(__dirname + "/icons/inbox" + litestring + ".png");
+});
+
+ipc.on("darkmode", function(mode, force) {
+	if (mode) litestring = "-lite";
+	else litestring = "";
+	if (force) mb.tray.setImage(__dirname + "/icons/inbox" + litestring + ".png");
 });
 
 ipc.on("quit", function() {

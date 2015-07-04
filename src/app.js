@@ -7,7 +7,9 @@ var moment = require("moment");
 var reddit = require("./reddit");
 var persist = require("node-persist");
 
-persist.initSync({dir: process.resourcesPath + "/persist"});
+persist.initSync({
+	dir: process.resourcesPath + "/persist"
+});
 
 var auth = new Vue({
 	el: "#authgate",
@@ -78,6 +80,7 @@ var main = new Vue({
 		loading: false,
 		morestatus: "Load More",
 		interval: 2,
+		darkmode: false,
 		firstcheck: true,
 		windowopen: false,
 		complete: false,
@@ -137,15 +140,34 @@ var main = new Vue({
 		togglePrefs: function() {
 			this.prefpane = !this.prefpane;
 		},
+		setConfig: function(config) {
+			this.interval = config.interval;
+			this.darkmode = config.darkmode;
+			this.updateInterval();
+			this.updateIconMode();
+		},
+		saveConfig: function() {
+			var config = {
+				interval: this.interval,
+				darkmode: this.darkmode
+			};
+			persist.setItem("config", config);
+		},
 		updateInterval: function() {
 			this.complete = true;
 			clearInterval(this.loop);
 			this.beginLoop();
-			persist.setItem("interval", this.interval);
+			this.saveConfig();
 			var _this = this;
 			setTimeout(function() {
 				_this.complete = false;
 			}, 750);
+		},
+		updateIconMode: function(){
+			var force = true;
+			if(this.newmail) force = false;
+			ipc.send("darkmode", this.darkmode, force);
+			this.saveConfig();
 		},
 		signOut: function() {
 			reddit.signOut();
@@ -187,8 +209,9 @@ ipc.on("show", function() {
 	main.windowopen = true;
 });
 
-if (persist.getItem("interval") !== undefined) {
-	main.interval = persist.getItem("interval");
+if (persist.getItem("config") !== undefined) {
+	var config = persist.getItem("config");
+	main.setConfig(config);
 }
 
 reddit.ready.on("ready", function() {
