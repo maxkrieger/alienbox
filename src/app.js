@@ -22,9 +22,8 @@ var auth = new Vue({
 			ipc.send("quit");
 		},
 		authenticate: function(force) {
-			var _this = this;
 			token.tokenizing = true;
-			_this.authenticated = true;
+			this.authenticated = true;
 			token.pulse();
 			if (!force) {
 				reddit.authenticate(function(success) {
@@ -88,14 +87,13 @@ var main = new Vue({
 	},
 	methods: {
 		show: function(force) {
-			var _this = this;
 			if (!(!this.firstcheck && this.windowopen) || force) {
-				_this.ready = true;
+				this.ready = true;
 				if (this.firstcheck) {
 					this.firstcheck = false;
 				}
-				_this.getUsername();
-				_this.getMail();
+				this.getUsername();
+				this.getMail();
 			}
 		},
 		openProfile: function() {
@@ -209,7 +207,7 @@ ipc.on("show", function() {
 	main.windowopen = true;
 });
 
-if (persist.getItem("config") !== undefined) {
+if (persist.getItem("config")) {
 	var config = persist.getItem("config");
 	main.setConfig(config);
 }
