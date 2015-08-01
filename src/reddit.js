@@ -7,42 +7,37 @@ var persist = require("node-persist");
 
 exports.ready = new events.EventEmitter();
 
-persist.initSync({dir: process.resourcesPath + "/persist"});
+persist.initSync({
+	dir: process.resourcesPath + "/persist"
+});
 
 var fs = require("fs");
-var reddit;
-var config;
+var config = JSON.parse(fs.readFileSync(__dirname + "/../config.json", "utf8"));
 
-var initEvents = function() {
-	reddit = new Snoocore({
-		userAgent: "alienbox client",
-		oauth: {
-			type: "explicit",
-			mobile: true,
-			duration: "permanent",
-			key: config.key,
-			secret: config.secret,
-			redirectUri: config.redirectUri,
-			scope: ["identity", "privatemessages"]
-		}
-	});
-	reddit.on('access_token_expired', function(responseError) {
-		var tokens = persist.getItem("tokens");
-		console.log("expired");
-		if (tokens.refresh !== "") {
-			reddit.refresh(tokens.refresh).then(function(refresh) {
-				var tokens = {
-					token: reddit.getAccessToken(),
-					refresh: reddit.getRefreshToken()
-				};
-				persist.setItem("tokens", tokens);
-			});
-		}
-	});
-	setTimeout(function() {
-		exports.ready.emit("ready");
-	}, 500);
-};
+var reddit = new Snoocore({
+	userAgent: "alienbox client",
+	oauth: {
+		type: "explicit",
+		mobile: true,
+		duration: "permanent",
+		key: config.key,
+		secret: config.secret,
+		redirectUri: config.redirectUri,
+		scope: ["identity", "privatemessages"]
+	}
+});
+reddit.on('access_token_expired', function(responseError) {
+	var tokens = persist.getItem("tokens");
+	if (tokens.refresh !== "") {
+		reddit.refresh(tokens.refresh).then(function(refresh) {
+			var tokens = {
+				token: reddit.getAccessToken(),
+				refresh: reddit.getRefreshToken()
+			};
+			persist.setItem("tokens", tokens);
+		});
+	}
+});
 
 exports.authenticate = function(fn) {
 	var state = Math.random();
@@ -145,12 +140,6 @@ exports.signOut = function() {
 	});
 };
 
-
-fs.readFile(__dirname + "/../config.json", "utf8", function(err, data) {
-	if (!err) {
-		config = JSON.parse(data);
-		initEvents();
-	} else {
-		console.error("fatal error: could not load config");
-	}
-});
+setTimeout(function() {
+	exports.ready.emit("ready");
+}, 500);
