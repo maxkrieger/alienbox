@@ -109,8 +109,7 @@ exports.getMail = function(start, lim, fn) {
 };
 
 var filterMail = function(mail) {
-	var filtered = [];
-	mail.data.children.forEach(function(item) {
+	return mail.data.children.map(function(item) {
 		item = item.data;
 		if (item.body.length > 300) item.body = item.body.substring(0, 300) + "...";
 		var newitem = {
@@ -123,9 +122,8 @@ var filterMail = function(mail) {
 		};
 		if (!item.was_comment) newitem.subreddit = item.subject;
 		if (newitem.context === "https://reddit.com") newitem.context = "https://www.reddit.com/message/messages/" + item.id;
-		filtered.push(newitem);
+		return newitem;
 	});
-	return filtered;
 };
 
 exports.readAll = function(fn) {
