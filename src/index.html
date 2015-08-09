@@ -43,7 +43,7 @@
 						<input type="number" v-model="interval" v-on="keyup: updateInterval | key 13" v-class="complete: complete"> minutes
 						<span class="micro" v-on="click: updateInterval()">save</span>
 					</li>
-					<li><b>Signed in as /u/{{user.name}}</b>
+					<li><b>Signed in as /u/{{user.name}}:</b>
 						<span class="micro" v-on="click: signOut()">sign out</span>
 					</li>
 					<li><b>Alienbox is open:</b>
