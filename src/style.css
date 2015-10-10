@@ -54,6 +54,7 @@ body {
 input[type="number"] {
 	width: 30px;
 	transition: 0.2s;
+	font-family: sans-serif;
 }
 #loading {
 	color: rgb(107, 107, 107);
