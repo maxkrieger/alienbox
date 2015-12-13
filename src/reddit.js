@@ -11,8 +11,7 @@ persist.initSync({
 	dir: process.resourcesPath + "/persist"
 });
 
-var fs = require("fs");
-var config = JSON.parse(fs.readFileSync(__dirname + "/../config.json", "utf8"));
+var config = require("../config.json");
 
 var reddit = new Snoocore({
 	userAgent: "alienbox client",
@@ -26,7 +25,7 @@ var reddit = new Snoocore({
 		scope: ["identity", "privatemessages"]
 	}
 });
-reddit.on('access_token_expired', function(responseError) {
+reddit.on("access_token_expired", function(responseError) {
 	var tokens = persist.getItem("tokens");
 	if (tokens.refresh !== "") {
 		reddit.refresh(tokens.refresh).then(function(refresh) {
